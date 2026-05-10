@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="YSHD — Experts en décret tertiaire et optimisation énergétique. Jusqu'à 60% d'économies sur vos consommations.">
+<title>YSHD — Décret Tertiaire & Optimisation Énergétique</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep: #1E0A02;
+  --green-mid: #3D1505;
+  --green-accent: #C04A0A;
+  --green-light: #E8650E;
+  --green-pale: #FEF0E6;
+  --white: #FFFAF7;
+  --cream: #FDF3EC;
+  --text: #1A0A02;
+  --text-soft: #5C3020;
+  --text-muted: #9A6A50;
+  --gold: #D4880A;
+  --border: rgba(192,74,10,0.13);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--white); color:var(--text); overflow-x:hidden; }
+
+/* ══ CURSOR ══ */
+.cursor { width:8px;height:8px;border-radius:50%;background:var(--green-light);position:fixed;pointer-events:none;z-index:9999;transition:transform 0.15s;mix-blend-mode:multiply; }
+.cursor-ring { width:32px;height:32px;border-radius:50%;border:1px solid var(--green-accent);position:fixed;pointer-events:none;z-index:9998;transition:all 0.3s;transform:translate(-12px,-12px); }
+
+/* ══ NAV ══ */
+nav {
+  position:fixed;top:0;width:100%;z-index:200;
+  padding:0 60px;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(30,10,2,0.0);
+  backdrop-filter:blur(0px);
+  border-bottom:1px solid transparent;
+  transition:all 0.4s;
+}
+nav.scrolled {
+  background:rgba(30,10,2,0.95);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(232,101,14,0.25);
+  height:62px;
+}
+.nav-logo { font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--white);letter-spacing:0.06em;text-decoration:none;display:flex;align-items:center;gap:10px; }
+.nav-logo-dot { width:8px;height:8px;border-radius:50%;background:var(--green-light);animation:breathe 2.5s ease-in-out infinite; }
+.nav-links { display:flex;gap:32px;list-style:none;align-items:center; }
+.nav-links a { font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.75);text-decoration:none;transition:color 0.2s;font-weight:500; }
+.nav-links a:hover { color:var(--green-light); }
+.nav-cta { background:var(--green-light)!important;color:var(--green-deep)!important;padding:10px 22px;border-radius:2px;font-weight:700!important; }
+.nav-cta:hover { background:var(--white)!important;color:var(--green-deep)!important; }
+.nav-burger { display:none;flex-direction:column;gap:5px;cursor:pointer; }
+.nav-burger span { display:block;width:24px;height:1.5px;background:var(--white);transition:all 0.3s; }
+
+/* ══ HERO PLEIN ÉCRAN ══ */
+#hero {
+  min-height:100vh;
+  position:relative;
+  display:flex;align-items:center;
+  overflow:hidden;
+}
+.hero-bg-img {
+  position:absolute;inset:0;z-index:0;
+  background:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=85') center/cover no-repeat;
+}
+.hero-bg-gradient {
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(105deg,
+      rgba(30,10,2,0.96) 0%,
+      rgba(30,10,2,0.88) 40%,
+      rgba(30,10,2,0.55) 65%,
+      rgba(30,10,2,0.2) 100%),
+    linear-gradient(to bottom, rgba(30,10,2,0.3) 0%, transparent 30%, transparent 70%, rgba(30,10,2,0.5) 100%);
+}
+.hero-grain {
+  position:absolute;inset:0;z-index:2;opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+.hero-content { position:relative;z-index:3;padding:140px 60px 80px;max-width:760px; }
+.hero-eyebrow {
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--green-light);margin-bottom:28px;font-weight:500;
+}
+.hero-eyebrow::before { content:'';width:28px;height:1px;background:var(--green-light); }
+#hero h1 {
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(3rem,5.5vw,5rem);
+  line-height:1.06;color:var(--white);margin-bottom:24px;
+}
+#hero h1 em { font-style:italic;color:var(--green-light); }
+.hero-sub { font-size:1.05rem;line-height:1.85;color:rgba(255,255,255,0.65);max-width:540px;margin-bottom:44px; }
+.hero-actions { display:flex;gap:16px;flex-wrap:wrap; }
+.btn-primary { background:var(--green-light);color:var(--green-deep);padding:17px 38px;font-size:0.82rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;border-radius:2px;display:inline-block; }
+.btn-primary:hover { background:var(--white);transform:translateY(-2px); }
+.btn-ghost { border:1px solid rgba(255,255,255,0.35);color:var(--white);padding:17px 38px;font-size:0.82rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.3s;border-radius:2px;display:inline-block; }
+.btn-ghost:hover { border-color:var(--green-light);color:var(--green-light); }
+
+/* Stats flottantes hero */
+.hero-stats-bar {
+  position:absolute;bottom:0;left:0;right:0;z-index:3;
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(20px);
+  border-top:1px solid rgba(255,255,255,0.08);
+  display:flex;
+}
+.hero-stat {
+  flex:1;padding:28px 40px;
+  border-right:1px solid rgba(255,255,255,0.08);
+  text-align:center;
+  transition:background 0.3s;
+}
+.hero-stat:last-child { border-right:none; }
+.hero-stat:hover { background:rgba(232,101,14,0.1); }
+.hero-stat-num { font-family:'DM Serif Display',serif;font-size:2.4rem;color:var(--white);line-height:1; }
+.hero-stat-num span { color:var(--green-light); }
+.hero-stat-label { font-size:0.75rem;color:rgba(255,255,255,0.5);letter-spacing:0.08em;margin-top:6px; }
+
+/* ══ BANDEAU URGENCE ══ */
+#urgence {
+  background:linear-gradient(135deg, var(--gold) 0%, #F0A830 50%, #B06010 100%);
+  padding:20px 60px;
+  display:flex;align-items:center;justify-content:center;gap:20px;
+}
+.urgence-icon { font-size:1.3rem; }
+.urgence-text { font-size:0.88rem;font-weight:600;color:var(--green-deep);letter-spacing:0.04em; }
+.urgence-cta { background:var(--green-deep);color:var(--white);padding:8px 20px;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:2px;white-space:nowrap;transition:background 0.2s; }
+.urgence-cta:hover { background:var(--green-accent); }
+
+/* ══ SECTIONS COMMUNES ══ */
+section { padding:110px 60px; }
+.section-tag { display:inline-flex;align-items:center;gap:10px;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--green-accent);margin-bottom:20px;font-weight:500; }
+.section-tag::before { content:'';width:20px;height:1px;background:var(--green-accent); }
+h2 { font-family:'DM Serif Display',serif;font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;color:var(--green-deep);margin-bottom:20px; }
+h2 em { font-style:italic;color:var(--green-accent); }
+.lead { font-size:1.05rem;line-height:1.85;color:var(--text-soft);max-width:560px; }
+
+/* ══ DÉCRET — fond dégradé foncé + photo ══ */
+#decret {
+  padding:0;overflow:hidden;
+  background:linear-gradient(180deg, var(--green-deep) 0%, #0A2E1A 60%, #1A0500 100%);
+  position:relative;
+}
+.decret-photo-bg {
+  position:absolute;right:0;top:0;bottom:0;width:50%;
+  background:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80') center/cover no-repeat;
+  opacity:0.15;
+}
+.decret-photo-bg::after {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg, var(--green-deep) 0%, transparent 40%);
+}
+.decret-inner { position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:100px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center; }
+.decret-left .section-tag { color:var(--green-light); }
+.decret-left .section-tag::before { background:var(--green-light); }
+.decret-left h2 { color:var(--white); }
+.decret-left h2 em { color:var(--green-light); }
+.decret-left p { color:rgba(255,255,255,0.6);line-height:1.85;margin-bottom:36px;font-size:0.95rem; }
+.decret-right { display:flex;flex-direction:column;gap:12px; }
+.decret-card {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(232,101,14,0.2);
+  padding:24px 28px;
+  display:flex;gap:20px;align-items:flex-start;
+  transition:all 0.3s;
+  backdrop-filter:blur(10px);
+}
+.decret-card:hover { background:rgba(232,101,14,0.1);border-color:rgba(232,101,14,0.45);transform:translateX(6px); }
+.decret-year { font-family:'DM Serif Display',serif;font-size:1.9rem;color:var(--green-light);line-height:1;flex-shrink:0;min-width:60px; }
+.decret-card-title { font-weight:600;color:var(--white);margin-bottom:5px;font-size:0.9rem; }
+.decret-card-desc { font-size:0.8rem;color:rgba(255,255,255,0.5);line-height:1.65; }
+.alert-band { background:linear-gradient(135deg, #D4880A, #F0A830);padding:16px 28px;display:flex;align-items:center;gap:14px;margin-top:8px; }
+.alert-band-text { font-size:0.82rem;font-weight:700;color:var(--green-deep);letter-spacing:0.02em; }
+
+/* ══ AVANTAGES — fond dégradé clair ══ */
+#avantages {
+  background:linear-gradient(160deg, #FFF8F3 0%, #FEF2E8 40%, #E4F2EA 100%);
+  position:relative;overflow:hidden;
+}
+#avantages::before {
+  content:'';position:absolute;top:-200px;right:-200px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle, rgba(232,101,14,0.07) 0%, transparent 70%);
+}
+#avantages::after {
+  content:'';position:absolute;bottom:-150px;left:-150px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle, rgba(192,74,10,0.05) 0%, transparent 70%);
+}
+.avantages-layout { max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:100px;align-items:start;position:relative;z-index:1; }
+.avantages-grid { display:grid;grid-template-columns:1fr 1fr;gap:3px; }
+.av-card { background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);padding:38px 32px;border-bottom:3px solid transparent;transition:all 0.3s; }
+.av-card:hover { border-bottom-color:var(--green-light);background:var(--white);transform:translateY(-3px);box-shadow:0 12px 40px rgba(192,74,10,0.1); }
+.av-icon { font-size:1.8rem;margin-bottom:16px; }
+.av-title { font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--green-deep);margin-bottom:10px; }
+.av-desc { font-size:0.83rem;color:var(--text-soft);line-height:1.75; }
+.savings-visual { margin-top:48px; }
+.savings-title { font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:22px; }
+.savings-row { margin-bottom:18px; }
+.savings-row-header { display:flex;justify-content:space-between;margin-bottom:8px; }
+.savings-row-label { font-size:0.84rem;color:var(--text-soft);font-weight:500; }
+.savings-row-val { font-size:0.84rem;color:var(--green-accent);font-weight:700; }
+.savings-bar { height:5px;background:rgba(192,74,10,0.1);border-radius:3px;overflow:hidden; }
+.savings-fill { height:100%;background:linear-gradient(90deg, #C04A0A, #E8650E);border-radius:3px;width:0;transition:width 1.5s cubic-bezier(0.4,0,0.2,1); }
+
+/* ══ PHOTO BANDE — immeubles tertiaires ══ */
+#photo-band {
+  height:420px;position:relative;overflow:hidden;padding:0;
+  background:var(--green-deep);
+}
+.photo-band-grid {
+  display:grid;grid-template-columns:2fr 1.5fr 1fr 1.2fr;
+  height:100%;gap:3px;
+}
+.pb-img {
+  position:relative;overflow:hidden;
+}
+.pb-img img { width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.7) saturate(0.85);transition:all 0.6s; }
+.pb-img:hover img { filter:brightness(0.9) saturate(1.1);transform:scale(1.03); }
+.pb-img::after {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(30,10,2,0.8) 0%, transparent 50%);
+}
+.pb-label {
+  position:absolute;bottom:18px;left:20px;z-index:1;
+  font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.7);
+}
+.photo-band-overlay {
+  position:absolute;inset:0;z-index:2;
+  background:linear-gradient(90deg, rgba(30,10,2,0.3) 0%, transparent 20%, transparent 80%, rgba(30,10,2,0.3) 100%);
+  pointer-events:none;
+}
+.photo-band-center {
+  position:absolute;inset:0;z-index:3;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.photo-band-text {
+  text-align:center;
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.6rem,3vw,2.6rem);
+  color:var(--white);
+  text-shadow:0 2px 30px rgba(0,0,0,0.5);
+}
+.photo-band-text em { color:var(--green-light);font-style:italic; }
+
+/* ══ MÉTHODE — fond dégradé sombre doux ══ */
+#methode {
+  background:linear-gradient(170deg, #FFF4ED 0%, #FDEEE0 50%, #FDEBD8 100%);
+  position:relative;overflow:hidden;
+}
+#methode::before {
+  content:'';position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1400&q=60') center/cover no-repeat;
+  opacity:0.04;
+}
+.methode-header { text-align:center;max-width:600px;margin:0 auto 70px;position:relative;z-index:1; }
+.methode-header .section-tag { justify-content:center; }
+.methode-header .section-tag::before { display:none; }
+.steps-timeline { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;position:relative;z-index:1; }
+.step-item { background:rgba(255,255,255,0.85);backdrop-filter:blur(10px);padding:48px 32px;text-align:center;position:relative;transition:all 0.3s; }
+.step-item:hover { background:var(--white);transform:translateY(-6px);box-shadow:0 20px 60px rgba(192,74,10,0.12); }
+.step-num { width:46px;height:46px;border-radius:50%;background:var(--green-deep);color:var(--white);font-family:'DM Serif Display',serif;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;transition:all 0.3s; }
+.step-item:hover .step-num { background:var(--green-light);transform:scale(1.1); }
+.step-icon-big { font-size:1.7rem;margin-bottom:14px; }
+.step-title { font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--green-deep);margin-bottom:12px; }
+.step-desc { font-size:0.82rem;color:var(--text-soft);line-height:1.75; }
+.step-duration { display:inline-block;margin-top:14px;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-accent);font-weight:700; }
+
+/* ══ IMPACT — fond photo + dégradé ══ */
+#impact {
+  padding:0;position:relative;overflow:hidden;
+  min-height:600px;display:flex;align-items:stretch;
+}
+.impact-bg-img {
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=1600&q=80') center/cover no-repeat;
+}
+.impact-bg-gradient {
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,
+    rgba(30,10,2,0.97) 0%,
+    rgba(45,15,5,0.93) 30%,
+    rgba(61,21,5,0.88) 60%,
+    rgba(30,10,2,0.95) 100%);
+}
+.impact-inner { position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:100px 60px;width:100%; }
+.impact-header { display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:70px; }
+.impact-header h2 { color:var(--white); }
+.impact-header h2 em { color:var(--green-light); }
+.impact-header .section-tag { color:var(--green-light); }
+.impact-header .section-tag::before { background:var(--green-light); }
+.impact-header .lead { color:rgba(255,255,255,0.6); }
+.impact-numbers { display:grid;grid-template-columns:repeat(3,1fr);gap:3px; }
+.impact-card {
+  background:rgba(255,255,255,0.05);backdrop-filter:blur(15px);
+  border:1px solid rgba(232,101,14,0.2);
+  padding:52px 40px;text-align:center;
+  transition:all 0.3s;
+}
+.impact-card:hover { background:rgba(232,101,14,0.12);border-color:rgba(232,101,14,0.5);transform:translateY(-4px); }
+.impact-num { font-family:'DM Serif Display',serif;font-size:3.8rem;color:var(--white);line-height:1;margin-bottom:8px; }
+.impact-num span { color:var(--green-light); }
+.impact-label { font-size:0.84rem;color:rgba(255,255,255,0.55);line-height:1.65; }
+
+/* ══ TÉMOIGNAGES — fond dégradé chaud ══ */
+#temoignages {
+  background:linear-gradient(150deg, #FFFAF7 0%, #FEF3EA 35%, #E2F1E9 70%, #FEF5EE 100%);
+  position:relative;overflow:hidden;
+}
+#temoignages::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg, #C04A0A, #E8650E, #F0A830, #E8650E, #C04A0A);
+}
+.temo-layout { max-width:1200px;margin:0 auto;position:relative;z-index:1; }
+.temo-header { display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px; }
+.temo-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:20px; }
+.temo-card {
+  background:var(--white);padding:40px;
+  border-left:3px solid transparent;
+  box-shadow:0 4px 24px rgba(192,74,10,0.06);
+  transition:all 0.3s;
+}
+.temo-card:hover { border-left-color:var(--green-light);transform:translateY(-5px);box-shadow:0 16px 48px rgba(192,74,10,0.12); }
+.temo-quote { font-family:'DM Serif Display',serif;font-size:1.05rem;font-style:italic;color:var(--green-deep);line-height:1.7;margin-bottom:24px; }
+.temo-saving { display:inline-block;background:var(--green-pale);color:var(--green-accent);font-weight:700;font-size:0.82rem;padding:5px 14px;border-radius:2px;margin-bottom:20px; }
+.temo-author { display:flex;align-items:center;gap:14px; }
+.temo-avatar { width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg, var(--green-mid), var(--green-accent));display:flex;align-items:center;justify-content:center;color:var(--white);font-size:0.85rem;font-weight:700;flex-shrink:0; }
+.temo-name { font-weight:600;font-size:0.88rem;color:var(--green-deep); }
+.temo-company { font-size:0.77rem;color:var(--text-muted); }
+
+/* ══ GALERIE BÂTIMENTS ══ */
+#galerie {
+  padding:80px 0;
+  background:linear-gradient(180deg, var(--green-deep) 0%, #1A0500 100%);
+}
+.galerie-header { text-align:center;padding:0 60px;margin-bottom:48px; }
+.galerie-header h2 { color:var(--white); }
+.galerie-header h2 em { color:var(--green-light); }
+.galerie-header .section-tag { justify-content:center;color:var(--green-light); }
+.galerie-header .section-tag::before { display:none; }
+.galerie-grid {
+  display:grid;
+  grid-template-columns:2fr 1.2fr 1.5fr 1fr;
+  grid-template-rows:260px 200px;
+  gap:4px;
+}
+.gal-item { position:relative;overflow:hidden;cursor:pointer; }
+.gal-item img { width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.75) saturate(0.85);transition:all 0.6s; }
+.gal-item:hover img { filter:brightness(0.95) saturate(1.15);transform:scale(1.04); }
+.gal-item::after { content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(30,10,2,0.75) 0%, transparent 55%); }
+.gal-item:nth-child(1) { grid-row:span 2; }
+.gal-item:nth-child(5) { grid-column:span 2; }
+.gal-label { position:absolute;bottom:16px;left:18px;z-index:1;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7); }
+
+/* ══ FAQ ══ */
+#faq {
+  background:linear-gradient(160deg, #FFF8F3 0%, #FEF0E6 50%, #FDE8D8 100%);
+  position:relative;
+}
+.faq-layout { max-width:800px;margin:0 auto; }
+.faq-header { text-align:center;margin-bottom:60px; }
+.faq-header .section-tag { justify-content:center; }
+.faq-header .section-tag::before { display:none; }
+.faq-item { border-bottom:1px solid var(--border);overflow:hidden; }
+.faq-question { padding:24px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;font-size:0.94rem;color:var(--green-deep);transition:color 0.2s;gap:20px; }
+.faq-question:hover { color:var(--green-accent); }
+.faq-toggle { width:30px;height:30px;flex-shrink:0;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--green-accent);transition:all 0.3s; }
+.faq-item.open .faq-toggle { background:var(--green-accent);color:var(--white);transform:rotate(45deg); }
+.faq-answer { max-height:0;overflow:hidden;transition:max-height 0.4s ease; }
+.faq-answer-inner { padding-bottom:24px;font-size:0.9rem;color:var(--text-soft);line-height:1.8; }
+.faq-item.open .faq-answer { max-height:300px; }
+
+/* ══ CONTACT — fond photo + dégradé ══ */
+#contact {
+  padding:0;position:relative;overflow:hidden;
+}
+.contact-bg-img {
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=70') center/cover no-repeat;
+}
+.contact-bg-gradient {
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,
+    rgba(30,10,2,0.98) 0%,
+    rgba(30,10,2,0.96) 40%,
+    rgba(45,15,5,0.93) 70%,
+    rgba(30,10,2,0.98) 100%);
+}
+.contact-inner { position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:110px 60px;display:grid;grid-template-columns:1fr 1.15fr;gap:100px; }
+.contact-left .section-tag { color:var(--green-light); }
+.contact-left .section-tag::before { background:var(--green-light); }
+.contact-left h2 { color:var(--white); }
+.contact-left h2 em { color:var(--green-light); }
+.contact-left > p { color:rgba(255,255,255,0.6);line-height:1.85;margin-bottom:48px; }
+.contact-info-items { display:flex;flex-direction:column;gap:24px; }
+.contact-info-item { display:flex;gap:16px;align-items:flex-start; }
+.contact-info-icon { width:42px;height:42px;flex-shrink:0;background:rgba(232,101,14,0.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem; }
+.contact-info-label { font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:3px; }
+.contact-info-val { font-size:0.92rem;color:var(--white); }
+.contact-form { display:flex;flex-direction:column;gap:14px; }
+.form-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+.form-group { display:flex;flex-direction:column;gap:7px; }
+.form-group label { font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45); }
+.form-group input,.form-group select,.form-group textarea { background:rgba(255,255,255,0.06);border:1px solid rgba(232,101,14,0.2);padding:13px 17px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.88rem;transition:border-color 0.3s;outline:none;border-radius:2px; }
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color:var(--green-light);background:rgba(255,255,255,0.08); }
+.form-group textarea { min-height:105px;resize:vertical; }
+.form-group select option { background:var(--green-deep); }
+.form-group input::placeholder,.form-group textarea::placeholder { color:rgba(255,255,255,0.2); }
+.btn-submit { background:linear-gradient(135deg, var(--green-light), #C04A0A);color:var(--white);border:none;padding:17px 38px;font-family:'DM Sans',sans-serif;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all 0.3s;align-self:flex-start;border-radius:2px; }
+.btn-submit:hover { background:linear-gradient(135deg, var(--white), var(--cream));color:var(--green-deep);transform:translateY(-2px); }
+
+/* ══ FOOTER ══ */
+footer { background:linear-gradient(180deg, #140400 0%, #0E0200 100%);border-top:1px solid rgba(232,101,14,0.1);padding:44px 60px; }
+.footer-inner { max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center; }
+.footer-logo { font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--white); }
+.footer-links { display:flex;gap:28px; }
+.footer-links a { font-size:0.78rem;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s; }
+.footer-links a:hover { color:var(--green-light); }
+.footer-right { font-size:0.75rem;color:rgba(255,255,255,0.2); }
+
+/* ══ ANIMATIONS ══ */
+@keyframes breathe { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:0.6} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:none} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.reveal { opacity:0;transform:translateY(24px);transition:opacity 0.75s ease,transform 0.75s ease; }
+.reveal.visible { opacity:1;transform:none; }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.3s; }
+.hero-content .hero-eyebrow { animation:fadeUp 0.9s ease 0.2s both; }
+.hero-content h1 { animation:fadeUp 0.9s ease 0.35s both; }
+.hero-content .hero-sub { animation:fadeUp 0.9s ease 0.5s both; }
+.hero-content .hero-actions { animation:fadeUp 0.9s ease 0.65s both; }
+.hero-stats-bar { animation:fadeIn 1.2s ease 0.8s both; }
+
+/* ══ MOBILE MENU ══ */
+.mobile-menu { position:fixed;inset:0;z-index:190;background:rgba(30,10,2,0.98);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;opacity:0;pointer-events:none;transition:opacity 0.3s; }
+.mobile-menu.open { opacity:1;pointer-events:all; }
+.mobile-menu a { font-family:'DM Serif Display',serif;font-size:2rem;color:var(--white);text-decoration:none;transition:color 0.2s; }
+.mobile-menu a:hover { color:var(--green-light); }
+.mobile-menu .m-cta { font-family:'DM Sans',sans-serif;font-size:0.88rem;background:var(--green-light);color:var(--green-deep);padding:16px 40px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;border-radius:2px; }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1024px) {
+  nav { padding:0 30px; }
+  .nav-links { display:none; }
+  .nav-burger { display:flex; }
+  .hero-content { padding:120px 30px 100px; }
+  .hero-stats-bar { display:none; }
+  .decret-inner,.avantages-layout,.impact-header,.contact-inner { grid-template-columns:1fr;gap:40px;padding:70px 30px; }
+  .decret-photo-bg { display:none; }
+  .steps-timeline,.impact-numbers,.temo-grid { grid-template-columns:1fr 1fr; }
+  .photo-band-grid { grid-template-columns:1fr 1fr; }
+  .galerie-grid { grid-template-columns:1fr 1fr;grid-template-rows:auto; }
+  .gal-item:nth-child(1) { grid-row:span 1; }
+  .gal-item:nth-child(5) { grid-column:span 1; }
+  section { padding:80px 30px; }
+  #urgence { padding:16px 24px;flex-wrap:wrap;text-align:center; }
+  footer { padding:30px; }
+  .footer-inner { flex-direction:column;gap:20px;text-align:center; }
+}
+@media (max-width:600px) {
+  .avantages-grid,.steps-timeline,.impact-numbers,.temo-grid,.form-grid { grid-template-columns:1fr; }
+  .photo-band-grid { grid-template-columns:1fr; }
+  .galerie-grid { grid-template-columns:1fr; }
+  .hero-actions { flex-direction:column; }
+  .impact-header { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo"><div class="nav-logo-dot"></div>YSHD</a>
+  <ul class="nav-links">
+    <li><a href="#decret">Décret Tertiaire</a></li>
+    <li><a href="#avantages">Notre Approche</a></li>
+    <li><a href="#methode">Méthode</a></li>
+    <li><a href="#impact">Résultats</a></li>
+    <li><a href="#contact" class="nav-cta">Diagnostic initial</a></li>
+  </ul>
+  <div class="nav-burger" id="burger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#decret" onclick="toggleMenu()">Décret Tertiaire</a>
+  <a href="#avantages" onclick="toggleMenu()">Notre Approche</a>
+  <a href="#methode" onclick="toggleMenu()">Méthode</a>
+  <a href="#impact" onclick="toggleMenu()">Résultats</a>
+  <a href="#contact" class="m-cta" onclick="toggleMenu()">Diagnostic initial</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-bg-gradient"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Experts Décret Tertiaire & Énergie</div>
+    <h1>Transformez une <em>obligation</em><br>en véritable avantage</h1>
+    <p class="hero-sub">Le décret tertiaire vous impose des réductions de consommation. Nous en faisons une opportunité : jusqu'à <strong style="color:var(--green-light)">60% d'économies</strong> sur vos charges énergétiques, un bilan carbone amélioré, et une conformité garantie.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Diagnostic initial</a>
+      <a href="#methode" class="btn-ghost">Notre méthode →</a>
+    </div>
+  </div>
+  <div class="hero-stats-bar">
+    <div class="hero-stat"><div class="hero-stat-num">60<span>%</span></div><div class="hero-stat-label">Économies maximales constatées</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">200<span>+</span></div><div class="hero-stat-label">Entreprises accompagnées</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">100<span>%</span></div><div class="hero-stat-label">Conformité garantie</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">2,5<span>ans</span></div><div class="hero-stat-label">Retour sur investissement moyen</div></div>
+  </div>
+</section>
+
+<!-- ══ BANDEAU ALERTE ══ -->
+<div id="urgence">
+  <div class="urgence-icon">⚠️</div>
+  <div class="urgence-text">Échéance 2030 : -40% obligatoire. Sanctions jusqu'à 7 500 €/an. Êtes-vous en conformité ?</div>
+  <a href="#contact" class="urgence-cta">Démarrer mon diagnostic</a>
+</div>
+
+<!-- ══ DÉCRET ══ -->
+<section id="decret">
+  <div class="decret-photo-bg"></div>
+  <div class="decret-inner">
+    <div class="decret-left reveal">
+      <div class="section-tag">Ce que dit la loi</div>
+      <h2>Le décret tertiaire :<br><em>une échéance qui approche</em></h2>
+      <p>Depuis 2019, toute entreprise occupant plus de 1 000 m² de surface tertiaire est soumise à des obligations de réduction de consommation énergétique. Les échéances se rapprochent, les sanctions sont lourdes. Mais surtout — c'est une occasion unique d'alléger vos charges.</p>
+      <a href="#contact" class="btn-primary" style="display:inline-block">Je veux être accompagné →</a>
+    </div>
+    <div class="decret-right reveal reveal-delay-1">
+      <div class="decret-card">
+        <div class="decret-year">2030</div>
+        <div><div class="decret-card-title">Objectif -40% de consommation</div><div class="decret-card-desc">Par rapport à l'année de référence. Première échéance majeure obligatoire pour tous les assujettis.</div></div>
+      </div>
+      <div class="decret-card">
+        <div class="decret-year">2040</div>
+        <div><div class="decret-card-title">Objectif -50% de consommation</div><div class="decret-card-desc">Les entreprises non conformes s'exposent à des sanctions et à une publication sur la liste noire OPERAT.</div></div>
+      </div>
+      <div class="decret-card">
+        <div class="decret-year">2050</div>
+        <div><div class="decret-card-title">Objectif -60% de consommation</div><div class="decret-card-desc">Objectif final aligné sur les accords de Paris. La trajectoire doit être amorcée dès aujourd'hui.</div></div>
+      </div>
+      <div class="alert-band">
+        <div>⚠️</div>
+        <div class="alert-band-text">Sanction jusqu'à 7 500 € / an par bâtiment non déclaré + publication publique obligatoire</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AVANTAGES ══ -->
+<section id="avantages">
+  <div class="avantages-layout">
+    <div class="reveal">
+      <div class="section-tag">Notre différence</div>
+      <h2>Bien plus qu'une mise en conformité</h2>
+      <p class="lead">Nous transformons chaque obligation légale en source concrète d'économies. Notre approche va bien au-delà du simple audit réglementaire.</p>
+      <div class="savings-visual reveal reveal-delay-1">
+        <div class="savings-title">Économies moyennes constatées par poste</div>
+        <div class="savings-row">
+          <div class="savings-row-header"><span class="savings-row-label">Chauffage & Climatisation</span><span class="savings-row-val">-45%</span></div>
+          <div class="savings-bar"><div class="savings-fill" data-width="45"></div></div>
+        </div>
+        <div class="savings-row">
+          <div class="savings-row-header"><span class="savings-row-label">Éclairage</span><span class="savings-row-val">-60%</span></div>
+          <div class="savings-bar"><div class="savings-fill" data-width="60"></div></div>
+        </div>
+        <div class="savings-row">
+          <div class="savings-row-header"><span class="savings-row-label">Équipements bureautiques</span><span class="savings-row-val">-30%</span></div>
+          <div class="savings-bar"><div class="savings-fill" data-width="30"></div></div>
+        </div>
+        <div class="savings-row">
+          <div class="savings-row-header"><span class="savings-row-label">Eau chaude sanitaire</span><span class="savings-row-val">-35%</span></div>
+          <div class="savings-bar"><div class="savings-fill" data-width="35"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="avantages-grid reveal reveal-delay-2">
+      <div class="av-card"><div class="av-icon">🔍</div><div class="av-title">Audit complet</div><div class="av-desc">Analyse poste par poste. Identification des gisements d'économies réels et chiffrés.</div></div>
+      <div class="av-card"><div class="av-icon">📊</div><div class="av-title">Plan d'actions</div><div class="av-desc">Feuille de route priorisée selon le retour sur investissement, du simple au structurant.</div></div>
+      <div class="av-card"><div class="av-icon">✅</div><div class="av-title">Conformité OPERAT</div><div class="av-desc">Déclaration et suivi officiel. Zéro risque de sanction, zéro démarche pour vous.</div></div>
+      <div class="av-card"><div class="av-icon">🌱</div><div class="av-title">Bilan carbone</div><div class="av-desc">Réduction mesurable. Un atout pour vos appels d'offres et partenariats.</div></div>
+      <div class="av-card"><div class="av-icon">💶</div><div class="av-title">Aides & financements</div><div class="av-desc">Montage des dossiers CEE, MaPrimeRénov' Pro, ADEME. On maximise vos aides.</div></div>
+      <div class="av-card"><div class="av-icon">📈</div><div class="av-title">Suivi & reporting</div><div class="av-desc">Tableau de bord, rapports périodiques, accompagnement continu dans la durée.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BANDE PHOTO BÂTIMENTS ══ -->
+<div id="photo-band">
+  <div class="photo-band-grid">
+    <div class="pb-img"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=80" alt="Immeuble de bureaux moderne" loading="lazy"><div class="pb-label">Immeubles de bureaux</div></div>
+    <div class="pb-img"><img src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=700&q=80" alt="Open space bureau" loading="lazy"><div class="pb-label">Espaces tertiaires</div></div>
+    <div class="pb-img"><img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=600&q=80" alt="Centre commercial" loading="lazy"><div class="pb-label">Commerces</div></div>
+    <div class="pb-img"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" alt="Bâtiment industriel tertiaire" loading="lazy"><div class="pb-label">Sites industriels</div></div>
+  </div>
+  <div class="photo-band-overlay"></div>
+  <div class="photo-band-center">
+    <div class="photo-band-text">Tous vos bâtiments <em>tertiaires</em> concernés</div>
+  </div>
+</div>
+
+<!-- ══ MÉTHODE ══ -->
+<section id="methode">
+  <div class="methode-header reveal">
+    <div class="section-tag">Notre méthode</div>
+    <h2>Un accompagnement <em>structuré</em> en 4 étapes</h2>
+    <p style="color:var(--text-soft);line-height:1.8;max-width:500px;margin:0 auto">De la première prise de contact jusqu'au suivi dans la durée, nous prenons en charge l'intégralité de votre démarche.</p>
+  </div>
+  <div class="steps-timeline reveal">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-icon-big">📋</div>
+      <div class="step-title">Diagnostic initial</div>
+      <div class="step-desc">Diagnostic initial au forfait de 2 500 € HT. Analyse complète de votre situation réglementaire et estimation chiffrée de votre potentiel d'économies.</div>
+      <span class="step-duration">Forfait 2 500 € HT — 1 semaine</span>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-icon-big">🔬</div>
+      <div class="step-title">Audit énergétique</div>
+      <div class="step-desc">Analyse de tous vos postes de consommation. Collecte des données, visite terrain et modélisation précise.</div>
+      <span class="step-duration">3 à 4 semaines</span>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-icon-big">🗺️</div>
+      <div class="step-title">Plan d'optimisation</div>
+      <div class="step-desc">Rapport complet avec actions priorisées, économies projetées, délais, ROI calculés. Dossiers d'aides montés.</div>
+      <span class="step-duration">2 semaines</span>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-icon-big">🔄</div>
+      <div class="step-title">Suivi & conformité</div>
+      <div class="step-desc">Déclaration OPERAT, accompagnement à la mise en œuvre, reporting annuel et garantie des résultats.</div>
+      <span class="step-duration">Continu</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ IMPACT ══ -->
+<section id="impact">
+  <div class="impact-bg-img"></div>
+  <div class="impact-bg-gradient"></div>
+  <div class="impact-inner">
+    <div class="impact-header reveal">
+      <div>
+        <div class="section-tag">Résultats concrets</div>
+        <h2>Des économies <em>mesurables</em>,<br>pas des promesses</h2>
+      </div>
+      <p class="lead">Chaque mission se conclut par un rapport chiffré. Voici les résultats constatés auprès de nos clients.</p>
+    </div>
+    <div class="impact-numbers reveal">
+      <div class="impact-card"><div class="impact-num">60<span>%</span></div><div class="impact-label">Économies maximales<br>constatées sur l'éclairage</div></div>
+      <div class="impact-card"><div class="impact-num">38<span>%</span></div><div class="impact-label">Réduction moyenne<br>des consommations</div></div>
+      <div class="impact-card"><div class="impact-num">2,5<span>ans</span></div><div class="impact-label">Retour sur investissement<br>moyen constaté</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TÉMOIGNAGES ══ -->
+<section id="temoignages">
+  <div class="temo-layout">
+    <div class="temo-header reveal">
+      <div><div class="section-tag">Témoignages</div><h2>Ils nous ont fait <em>confiance</em></h2></div>
+    </div>
+    <div class="temo-grid reveal">
+      <div class="temo-card">
+        <div class="temo-saving">-52% sur la facture énergétique</div>
+        <div class="temo-quote">« Nous pensions simplement devoir cocher une case légale. YSHD nous a montré que c'était bien plus : en 18 mois, nos charges énergétiques ont baissé de plus de la moitié. »</div>
+        <div class="temo-author"><div class="temo-avatar">ML</div><div><div class="temo-name">Marie-Laure D.</div><div class="temo-company">DAF — Groupe immobilier, 4 800 m²</div></div></div>
+      </div>
+      <div class="temo-card">
+        <div class="temo-saving">-38% + conformité totale</div>
+        <div class="temo-quote">« Le rapport d'audit était d'une clarté remarquable. Chaque action chiffrée avec son délai de retour. On a suivi 80% des recommandations et les résultats sont au rendez-vous. »</div>
+        <div class="temo-author"><div class="temo-avatar">PB</div><div><div class="temo-name">Pierre-Baptiste R.</div><div class="temo-company">Directeur Technique — PME logistique, 12 000 m²</div></div></div>
+      </div>
+      <div class="temo-card">
+        <div class="temo-saving">-44% + 28 000 € d'aides obtenues</div>
+        <div class="temo-quote">« YSHD a monté tous nos dossiers d'aides. On a récupéré 28 000 € de subventions qu'on n'aurait jamais trouvés seuls. Un accompagnement vraiment complet. »</div>
+        <div class="temo-author"><div class="temo-avatar">SN</div><div><div class="temo-name">Sophie N.</div><div class="temo-company">Gérante — Clinique privée, 2 200 m²</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALERIE BÂTIMENTS ══ -->
+<section id="galerie">
+  <div class="galerie-header reveal">
+    <div class="section-tag">Nos interventions</div>
+    <h2>Tous types de <em>bâtiments tertiaires</em></h2>
+  </div>
+  <div class="galerie-grid reveal">
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80" alt="Open space bureaux" loading="lazy"><div class="gal-label">Bureaux & open space</div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1565343896145-2ee8e3bde64b?w=700&q=80" alt="Immeuble commercial" loading="lazy"><div class="gal-label">Commerces</div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Bâtiment industriel" loading="lazy"><div class="gal-label">Sites industriels</div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=500&q=80" alt="Hôpital clinique" loading="lazy"><div class="gal-label">Santé & hôtellerie</div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80" alt="Établissement scolaire" loading="lazy"><div class="gal-label">Enseignement</div></div>
+    <div class="gal-item"><img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&q=80" alt="Entrepôt logistique" loading="lazy"><div class="gal-label">Logistique</div></div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq">
+  <div class="faq-layout">
+    <div class="faq-header reveal">
+      <div class="section-tag">Questions fréquentes</div>
+      <h2>Vous avez des <em>questions ?</em></h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Mon entreprise est-elle concernée par le décret tertiaire ?<div class="faq-toggle">+</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Vous êtes concerné si vous occupez un bâtiment à usage tertiaire (bureaux, commerces, hôtels, hôpitaux…) d'une surface supérieure ou égale à 1 000 m². Si vous n'êtes pas sûr, contactez-nous : contactez-nous pour démarrer votre diagnostic initial (forfait 2 500 € HT).</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Que se passe-t-il si je ne fais rien ?<div class="faq-toggle">+</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Les entreprises non conformes s'exposent à une sanction administrative jusqu'à 7 500 € par an et par bâtiment. Votre nom apparaît également sur la plateforme OPERAT publiquement accessible — un risque réputationnel réel avec vos clients et partenaires.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Combien coûte un audit YSHD ?<div class="faq-toggle">+</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Le diagnostic initial est proposé au forfait de 2 500 € HT. L'audit complet est facturé selon la superficie et la complexité. Dans tous les cas, les économies générées remboursent notre intervention dès la première année. Devis transparent avant tout engagement.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">Pouvez-vous nous aider à financer les travaux ?<div class="faq-toggle">+</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Oui, c'est une partie intégrante de notre mission. Nous identifions et montons les dossiers CEE, MaPrimeRénov' Pro, aides ADEME et collectivités. Nos clients récupèrent en moyenne 15 à 30% du coût des travaux en subventions.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="contact-bg-img"></div>
+  <div class="contact-bg-gradient"></div>
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <div class="section-tag">Parlons de votre projet</div>
+      <h2>Un diagnostic <em>initial</em>,<br>sans engagement</h2>
+      <p>Pour 2 500 € HT, nous réalisons un diagnostic complet de votre situation réglementaire, estimons précisément votre potentiel d'économies et vous remettons un rapport clair avec les actions prioritaires à mener.</p>
+      <div class="contact-info-items">
+        <div class="contact-info-item"><div class="contact-info-icon">📞</div><div><div class="contact-info-label">Téléphone</div><div class="contact-info-val">06 10 84 75 44</div></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">✉️</div><div><div class="contact-info-label">E-mail</div><div class="contact-info-val">contact@yoursmarthomedesign.com</div></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">📍</div><div><div class="contact-info-label">Localisation</div><div class="contact-info-val">Auribeau-sur-Siagne<br>Interventions toute la France</div></div></div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group"><label>Prénom *</label><input type="text" name="prenom" placeholder="Jean" required></div>
+          <div class="form-group"><label>Nom *</label><input type="text" name="nom" placeholder="Dupont" required></div>
+        </div>
+        <div class="form-group"><label>Société *</label><input type="text" name="societe" placeholder="Nom de votre entreprise" required></div>
+        <div class="form-grid">
+          <div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" placeholder="06 XX XX XX XX"></div>
+          <div class="form-group"><label>E-mail *</label><input type="email" name="email" placeholder="jean@societe.fr" required></div>
+        </div>
+        <div class="form-group">
+          <label>Surface de vos locaux</label>
+          <select name="surface">
+            <option value="">Sélectionnez...</option>
+            <option>Entre 1 000 et 2 500 m²</option>
+            <option>Entre 2 500 et 5 000 m²</option>
+            <option>Entre 5 000 et 15 000 m²</option>
+            <option>Plus de 15 000 m²</option>
+            <option>Je ne sais pas encore</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Votre message</label><textarea name="message" placeholder="Décrivez votre situation, vos questions, ou dites-nous simplement que vous souhaitez être rappelé..."></textarea></div>
+        <button type="submit" class="btn-submit">Demander mon diagnostic initial →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">YSHD</div>
+    <div class="footer-links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-right">© 2025 YSHD — Auribeau-sur-Siagne</div>
+  </div>
+</footer>
+
+<script>
+/* Cursor */
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+document.addEventListener('mousemove',e=>{
+  cursor.style.left=e.clientX-4+'px';cursor.style.top=e.clientY-4+'px';
+  ring.style.left=e.clientX-16+'px';ring.style.top=e.clientY-16+'px';
+});
+
+/* Nav */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+
+/* Reveal */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* Savings bars */
+const barObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.savings-fill').forEach(b=>{b.style.width=b.dataset.width+'%';});
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.savings-visual').forEach(el=>barObs.observe(el));
+
+/* FAQ */
+function toggleFaq(el){
+  const item=el.parentElement;
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+/* Mobile menu */
+window.toggleMenu=()=>{
+  document.getElementById('burger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+};
+
+/* Form */
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.btn-submit');
+  btn.textContent='✓ Demande envoyée — Nous vous contactons sous 24h';
+  btn.style.background='linear-gradient(135deg,#E8650E,#C04A0A)';
+  btn.disabled=true;
+}
+</script>
+</body>
+</html>
