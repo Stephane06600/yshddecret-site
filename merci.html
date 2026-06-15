@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demande reçue - YSHD</title>
+<meta http-equiv="refresh" content="6;url=index.html">
+<style>
+:root {
+  --green-deep: #1A3329;
+  --green-accent: #C04A0A;
+  --green-light: #E8650E;
+  --white: #FFFFFF;
+  --cream: #F5EFE6;
+  --text-soft: rgba(26,51,41,0.7);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, var(--green-deep) 0%, #2A4A3D 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: var(--white);
+}
+.confirmation-box {
+  max-width: 560px;
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(232,101,14,0.3);
+  border-radius: 4px;
+  padding: 60px 40px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+.check-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-light), var(--green-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: var(--white);
+  animation: scaleIn 0.5s ease-out;
+}
+@keyframes scaleIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2.2rem;
+  margin-bottom: 18px;
+  line-height: 1.2;
+}
+h1 em { color: var(--green-light); font-style: italic; }
+.message {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  color: rgba(255,255,255,0.85);
+}
+.message strong { color: var(--green-light); }
+.btn-home {
+  display: inline-block;
+  background: var(--green-light);
+  color: var(--green-deep);
+  padding: 15px 35px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.btn-home:hover {
+  background: var(--white);
+  transform: translateY(-2px);
+}
+.redirect-info {
+  margin-top: 25px;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div class="confirmation-box">
+  <div class="check-icon">✓</div>
+  <h1>Demande <em>bien reçue</em></h1>
+  <p class="message">
+    Merci pour votre demande. Nous avons bien reçu vos informations et nous reviendrons vers vous <strong>sous 24 heures ouvrées</strong> pour discuter de votre projet.
+    <br><br>
+    Un email de confirmation a été envoyé à notre équipe.
+  </p>
+  <a href="index.html" class="btn-home">Retour au site</a>
+  <p class="redirect-info">Redirection automatique dans 6 secondes...</p>
+</div>
+</body>
+</html>
